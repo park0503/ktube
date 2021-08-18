@@ -1,0 +1,7 @@
+extends base.pug
+
+block content
+    form(method="post")
+        label(for=`edit_video${video.id}_title`) Change Title of video
+        input(id=`edit_video${video.id}_title` name="title" placeholder="Video Title" value=video.title required)
+        input(type="submit" value="Submit")

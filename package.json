@@ -18,7 +18,9 @@
   "homepage": "https://github.com/park0503/ktube#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "morgan": "^1.10.0"
+    "mongoose": "^5.13.7",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
