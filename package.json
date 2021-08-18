@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js --delay 2",
+    "dev": "nodemon --exec babel-node src/init.js --delay 2",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
