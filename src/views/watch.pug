@@ -4,7 +4,10 @@ include mixins/video
 block content
     div
         p=video.description
+        ul
+            each hashtag in video.hashtags
+                li=hashtag
         small=video.createdAt
     a(href=`${video.id}/edit`) Edit video 👉
     br
-    a(href=`${video.id}/delete`) Delete Video &rarr;
+    a(href=`${video.id}/delete`) Delete Video 👉;
