@@ -19,6 +19,8 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "install": "^0.13.0",
     "mongoose": "^5.13.7",
     "morgan": "^1.10.0",
     "pug": "^3.0.2"

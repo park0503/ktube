@@ -1,10 +1,18 @@
 nav 
     ul 
-        li 
-            a(href="/videos/upload") Upload Video
         li
             a(href="/") Home
         li
             a(href="/search") Search
-        li
-            a(href="/join") Join
+        if !loggedIn
+            li
+                a(href="/join") Join
+            li
+                a(href="/login") Login
+        else
+            li 
+                a(href="/users/logout") logout
+            li 
+                a(href="/videos/upload") Upload Video
+            li 
+                a(href="/my-profile") #{loggedInUser.name}의 Profile

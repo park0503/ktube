@@ -1,3 +1,13 @@
 extends base.pug
 
 block content
+    if errorMessage
+        span=errorMessage
+    form(method='post')
+        input(name="username", type="eamil", required, placeholder="UserName")
+        input(name="password", type="password", required, placeholder="Password")
+        input(type="submit", value="Join")
+    hr
+    div
+        span Don't have an account? 
+        a(href="/join") Create on now &rarr;
