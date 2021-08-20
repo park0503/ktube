@@ -2,3 +2,4 @@
 /package-lock.json
 sample.ts
 tsconfig.json
+.env

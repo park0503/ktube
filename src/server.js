@@ -4,6 +4,7 @@ import rootRouter from "./routers/rootRouter"
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middleware";
 
 
@@ -18,10 +19,12 @@ app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
-    secret: "Hello!", 
-    resave: true,
-    saveUninitialized: true, 
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
 }));
+
 app.use(localsMiddleware); //꼭 session middleware 이후에 와야 함.
 app.use("/", rootRouter);
 app.use("/users", userRouter);

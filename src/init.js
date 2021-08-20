@@ -1,6 +1,11 @@
+import "dotenv/config"
 import "./db";
 import "./models/Video";
 import app from "./server";
+
+process.on('SIGINT', () => { console.log("exiting..."); process.exit(); });
+
+process.on('exit', () => { console.log("exiting..."); process.exit(); });
 
 const PORT = 3000;
 

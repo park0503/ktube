@@ -31,7 +31,7 @@ export const postJoin = async (req, res) => {
             location,
             email
         });
-    } catch(error) {
+    } catch (error) {
         return res.status(400).render("join", {
             pageTitle,
             errorMessage: error._message,
@@ -50,12 +50,12 @@ export const getLogin = (req, res) => {
         pageTitle: "login"
     });
 }
-export const postLogin = async(req, res) => {
-    const {username, password} = req.body;
+export const postLogin = async (req, res) => {
+    const { username, password } = req.body;
     const pageTitle = "login";
-    const user = await User.findOne({username});
-    if(!user) {
-        return res.status(400).render("login", {pageTitle, errorMessage: "An account with this username does not exists."})
+    const user = await User.findOne({ username });
+    if (!user) {
+        return res.status(400).render("login", { pageTitle, errorMessage: "An account with this username does not exists." })
     }
     console.log(password, user.password)
     const match = await bcrypt.compare(password, user.password);
@@ -67,7 +67,7 @@ export const postLogin = async(req, res) => {
         })
     }
     req.session.loggedIn = true,
-    req.session.user = user;
+        req.session.user = user;
     return res.redirect("/");
 }
 export const logout = (req, res) => {
@@ -75,4 +75,35 @@ export const logout = (req, res) => {
 }
 export const see = (req, res) => {
     res.send("See User Profile!");
+}
+
+export const startGithubLogin = (req, res) => {
+    const baseUrl = "https://github.com/login/oauth/authorize"
+    const config = {
+        client_id: process.env.GITHUB_CLIENT_ID,
+        allow_signup: false,
+        scope: "read:user user:email"
+    }
+    const params = new URLSearchParams(config).toString();
+    const finalUrl = `${baseUrl}?${params}`;
+    return res.redirect(finalUrl);
+}
+
+export const finishGithubLogin = async (req, res) => {
+    const baseUrl = "https://github.com/login/oauth/access_token"
+    const config = {
+        client_id: process.env.GITHUB_CLIENT_ID,
+        clinet_secret: process.env.GITHUB_CLIENT_SECRET,
+        code: req.query.code,
+    }
+    const params = new URLSearchParams(config).toString();
+    const finalUrl = `${baseUrl}?${params}`;
+    const data = await fetch(finalUrl, {
+        method: "post",
+        headers: {
+            Accept: "application/json",
+        },
+    });
+    const json = await data.json();
+    console.log(json);
 }
