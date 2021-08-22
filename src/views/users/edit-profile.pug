@@ -1,4 +1,4 @@
-extends base.pug
+extends ../base.pug
 
 block content
     if errorMessage
@@ -9,3 +9,6 @@ block content
         input(name="username", type="eamil", required, placeholder="UserName", value=loggedInUser.username)
         input(name="location", type="text", required, placeholder="Location", value=loggedInUser.location)
         input(type="submit", value="Edit")
+        if !loggedInUser.socialOnly
+            hr
+            a(href="change-password") Change Password &rarr;

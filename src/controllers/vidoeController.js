@@ -11,7 +11,7 @@ export const watch = async (req, res) => {
     if (!video) {
         return res.status(404).render("404", { pageTitle: "Video not found." });
     }
-    return res.render("watch", { pageTitle: video.title, video });
+    return res.render("videos/watch", { pageTitle: video.title, video });
 }
 export const edit = async (req, res) => {
     const { id } = req.params;
@@ -19,7 +19,7 @@ export const edit = async (req, res) => {
     if (!video) {
         return res.status(404).render("404", { pageTitle: "Video not found." });
     }
-    return res.render("edit", { pageTitle: `Edit: ${video.title}`, video });
+    return res.render("videos/edit", { pageTitle: `Edit: ${video.title}`, video });
 }
 
 export const update = async (req, res) => {
@@ -55,7 +55,7 @@ export const remove = async (req, res) => {
     return res.redirect("/");
 }
 export const upload = (req, res) => {
-    return res.render("upload", {
+    return res.render("videos/upload", {
         pageTitle: "Upload Video"
     });
 }
@@ -69,7 +69,7 @@ export const create = async (req, res) => {
         });
         return res.status(400).redirect("/");
     } catch (error) {
-        return res.render("upload", {
+        return res.render("videos/upload", {
             pageTitle: "Upload Video",
             errorMessage: error._message,
         });

@@ -1,5 +1,5 @@
-extends base.pug
-include mixins/video
+extends ../base.pug
+include ../mixins/video
 
 block content
     div
@@ -10,4 +10,4 @@ block content
         small=video.createdAt
     a(href=`${video.id}/edit`) Edit video 👉
     br
-    a(href=`${video.id}/delete`) Delete Video 👉;
+    a(href=`${video.id}/delete`) Delete Video 👉
