@@ -1,9 +1,11 @@
 extends base.pug
 
 block content
+    if errorMessage
+            span=errorMessage
     form(method='post')
         input(name="name", type="text", required, placeholder="Name", value=loggedInUser.name)
         input(name="email", type="text", required, placeholder="Email", value=loggedInUser.email)
         input(name="username", type="eamil", required, placeholder="UserName", value=loggedInUser.username)
         input(name="location", type="text", required, placeholder="Location", value=loggedInUser.location)
-        input(type="submit", value="Join")
+        input(type="submit", value="Edit")
