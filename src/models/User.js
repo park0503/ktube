@@ -7,6 +7,13 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    avatarUrl: {
+        type: String,
+    },
+    socialOnly: {
+        type: Boolean,
+        default: false,
+    },
     username: {
         type: String,
         required: true,
@@ -14,7 +21,6 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        requried: true
     },
     name: {
         type: String,
@@ -24,7 +30,9 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.pre('save', async function () {
-    this.password = await bcrypt.hash(this.password, 5);
+    if (this.password) {
+        this.password = await bcrypt.hash(this.password, 5);
+    }
 });
 
 const User = mongoose.model("User", userSchema);

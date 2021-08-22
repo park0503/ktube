@@ -23,7 +23,6 @@ export const edit = async (req, res) => {
 }
 
 export const update = async (req, res) => {
-    console.log(req.body);
     const { id } = req.params;
     const { title, description, hashtags } = req.body;
     const video = await Video.exists({ _id: id });
