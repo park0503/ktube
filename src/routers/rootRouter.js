@@ -1,6 +1,6 @@
 import express from "express"
 import { reset } from "nodemon";
-import { trending, search } from "../controllers/vidoeController";
+import { trending, search } from "../controllers/videoController";
 import { getJoin, getLogin, postLogin, postJoin, finishGithubLogin } from "../controllers/userController";
 import { publicOnlyMiddleware } from "../middleware";
 

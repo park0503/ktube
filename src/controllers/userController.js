@@ -3,6 +3,7 @@ import User from "../models/User";
 import bcrypt from "bcrypt"
 import fetch from "node-fetch";
 import { render } from "pug";
+import Video from "../models/Video";
 
 export const getJoin = (req, res) => {
     return res.render("join", {
@@ -119,12 +120,13 @@ export const logout = (req, res) => {
     return res.redirect("/");
 }
 export const see = async (req, res) => {
-    const {id} = req.params;
-    const user = await User.findById(id);
-    if(!user) {
-        return res.status(404).render("404", {pageTitle: "User not found."});
+    const { id } = req.params;
+    const user = await User.findById(id).populate("videos");
+    if (!user) {
+        return res.status(404).render("404", { pageTitle: "User not found." });
     }
-    return res.render("users/profile", {pageTitle: user.name, user});
+    //const videos = await Video.find({ owner: id });
+    return res.render("users/profile", { pageTitle: user.name, user });
 }
 
 export const startGithubLogin = (req, res) => {
