@@ -49,10 +49,12 @@ export const getEdit = (req, res) => {
 export const postEdit = async (req, res) => {
     const { session:
         {
-            user: { _id, email: sessionEmail, username: sessionUsername },
+            user: { _id, email: sessionEmail, username: sessionUsername, sessionAvatarUrl },
         },
+        file,
     } = req;
     const {
+        avatarUrl,
         name,
         email,
         username,
@@ -75,7 +77,7 @@ export const postEdit = async (req, res) => {
             });
         }
     }
-    const updatedUser = await User.findByIdAndUpdate(_id, { name, email, username, location }, { new: true }); //findByIdAndUpdate의 3번째 인자는 option이다.
+    const updatedUser = await User.findByIdAndUpdate(_id, { avatarUrl: file ? file.path : sessionAvatarUrl, name, email, username, location }, { new: true }); //findByIdAndUpdate의 3번째 인자는 option이다.
     //req.session.user = {
     //    ...req.session.user,
     //    name,
@@ -116,8 +118,13 @@ export const logout = (req, res) => {
     req.session.destroy();
     return res.redirect("/");
 }
-export const see = (req, res) => {
-    res.send("See User Profile!");
+export const see = async (req, res) => {
+    const {id} = req.params;
+    const user = await User.findById(id);
+    if(!user) {
+        return res.status(404).render("404", {pageTitle: "User not found."});
+    }
+    return res.render("users/profile", {pageTitle: user.name, user});
 }
 
 export const startGithubLogin = (req, res) => {
@@ -221,3 +228,4 @@ export const postChangePassword = async (req, res) => {
     }
     return res.redirect("/users/logout");
 }
+

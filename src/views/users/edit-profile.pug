@@ -3,7 +3,10 @@ extends ../base.pug
 block content
     if errorMessage
             span=errorMessage
-    form(method='post')
+    form(method='post', enctype="multipart/form-data")
+        img(src=`/${loggedInUser.avatarUrl}` style="width: 100px; height=100px;")
+        label(for='avatar') Avatar
+        input(type="file", id="avatar", name="avatar", accept="image/*")
         input(name="name", type="text", required, placeholder="Name", value=loggedInUser.name)
         input(name="email", type="text", required, placeholder="Email", value=loggedInUser.email)
         input(name="username", type="eamil", required, placeholder="UserName", value=loggedInUser.username)

@@ -2,12 +2,15 @@ extends ../base.pug
 include ../mixins/video
 
 block content
+    video(src=`/${video.fileUrl}`, controls, style="width: 960px; height: 540px;")
     div
         p=video.description
         ul
             each hashtag in video.hashtags
                 li=hashtag
+        small Uploaded by #{video.owner.name}
         small=video.createdAt
-    a(href=`${video.id}/edit`) Edit video 👉
-    br
-    a(href=`${video.id}/delete`) Delete Video 👉
+    if String(loggedInUser._id) === String(video.owner._id)
+        a(href=`${video.id}/edit`) Edit video 👉
+        br
+        a(href=`${video.id}/delete`) Delete Video 👉
