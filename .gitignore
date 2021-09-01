@@ -4,3 +4,4 @@ sample.ts
 tsconfig.json
 .env
 /uploads
+/assets
