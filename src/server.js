@@ -26,7 +26,9 @@ app.use(session({
 }));
 
 app.use(localsMiddleware); //꼭 session middleware 이후에 와야 함.
+//express에게 해당 path의 입력이 static이라고, 즉 유저에게 공개해달라고 알려줌.
 app.use("/uploads", express.static("uploads"));
+app.use("/assets", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
