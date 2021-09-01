@@ -9,7 +9,7 @@ module.exports = {
     mode: 'development',
     watch: true,
     output: {
-        filename: "js/main.js",
+        filename: "javascript/main.js",
         //path는 무조건 절대경로
         path: path.resolve(__dirname, "assets"),
         clean: true,
