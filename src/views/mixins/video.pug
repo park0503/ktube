@@ -1,10 +1,9 @@
 mixin video(video)
-    h4
-        a(href="/videos/" + video.id)=video.title
-        //attribute서는 #{}사용 불가
-        p=video.description
-        ul
-            each hashtag in video.hashtags
-                li=hashtag
-        small=video.createdAt
-        hr 
+  a(href="/videos/" + video.id).video-mixin
+    //attribute서는 #{}사용 불가
+    div.video-mixin__thumb
+    div.video-mixin__data
+      sapn.video-mixin__title=video.title
+      div.video-mixin__meta
+        span #{video.owner.name} ◾ 
+        span #{video.meta.views} 회

@@ -3,7 +3,7 @@ extends ../base.pug
 block content
     if errorMessage
             span=errorMessage
-    form(method='post', enctype="multipart/form-data")
+    form(method='post', enctype="multipart/form-data").edit-profile__form
         img(src=`/${loggedInUser.avatarUrl}` style="width: 100px; height=100px;")
         label(for='avatar') Avatar
         input(type="file", id="avatar", name="avatar", accept="image/*")
@@ -13,5 +13,5 @@ block content
         input(name="location", type="text", required, placeholder="Location", value=loggedInUser.location)
         input(type="submit", value="Edit")
         if !loggedInUser.socialOnly
-            hr
-            a(href="change-password") Change Password &rarr;
+            div.edit-profile__password
+                a(href="change-password") Change Password &rarr;

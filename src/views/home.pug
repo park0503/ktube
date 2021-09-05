@@ -2,9 +2,8 @@ extends base.pug
 include mixins/video
 
 block content
-    h1 K-TUBE
-    h3 the proud of Korea
-    each video in videos
-        +video(video)
-    else
-        div Sorry nothing found.
+    div.video-grid
+        each video in videos
+            +video(video)
+        else
+            span.empty__message No videos found
