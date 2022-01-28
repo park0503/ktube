@@ -3,15 +3,19 @@ include ../mixins/video
 
 block content
     video(src=`/${video.fileUrl}`, controls, style="width: 960px; height: 540px;")
-    small Uploaded by 
-        a(href=`/users/${video.owner._id}`) #{video.owner.name}
-    div
-        p=video.description
-        ul
-            each hashtag in video.hashtags
-                li=hashtag
-        small=video.createdAt
-    if String(loggedInUser._id) === String(video.owner._id)
-        a(href=`${video.id}/edit`) Edit video 👉
-        br
-        a(href=`${video.id}/delete`) Delete Video 👉
+    //-
+        small Uploaded by 
+            a(href=`/users/${video.owner._id}`) #{video.owner.name}
+        div
+            p=video.description
+            ul
+                each hashtag in video.hashtags
+                    li=hashtag
+            small=video.createdAt
+        if String(loggedInUser._id) === String(video.owner._id)
+            a(href=`${video.id}/edit`) Edit video 👉
+            br
+            a(href=`${video.id}/delete`) Delete Video 👉
+
+block scripts
+    script(src="/assets/js/videoPlayer.js")
