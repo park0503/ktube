@@ -75,7 +75,7 @@ export const postEdit = async (req, res) => {
             });
         }
     }
-    const updatedUser = await User.findByIdAndUpdate(_id, { avatarUrl: file ? file.path : sessionAvatarUrl, name, email, username, location }, { new: true }); //findByIdAndUpdate의 3번째 인자는 option이다.
+    const updatedUser = await User.findByIdAndUpdate(_id, { avatarUrl: file ? `/${file.path}` : sessionAvatarUrl, name, email, username, location }, { new: true }); //findByIdAndUpdate의 3번째 인자는 option이다.
     //req.session.user = {
     //    ...req.session.user,
     //    name,
