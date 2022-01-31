@@ -17,18 +17,16 @@ let controlsMovementTimeout = null;
 let volumeValue = 0.5;
 video.volume = volumeValue;
 
-const handlePlayClick = (e) => {
-    //비디오가 재생되고 있다면 멈춤
+const handleVideoPlay = () => {
     if (video.paused) {
         video.play();
     } else {
         video.pause();
     }
-    //아니라면 비디오 재생
     playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
 };
 
-const handleMute = (e) => {
+const handleMute = () => {
     if (video.muted) {
         video.muted = false;
     } else {
@@ -58,7 +56,7 @@ const handleVolume = (e) => {
 
 const formatTime = (seconds) => {
     return new Date(Math.floor(seconds * 1000)).toISOString().substring(14, 19);
-}
+};
 
 const handleLoadedMetadata = () => {
     totalTime.innerText = formatTime(video.duration);
@@ -68,7 +66,7 @@ const handleLoadedMetadata = () => {
 const handleTimeUpdate = () => {
     currentTime.innerText = formatTime(video.currentTime);
     timeLine.value = Math.floor(video.currentTime);
-}
+};
 
 const handleTimeLineChange = (e) => {
     const {
@@ -77,7 +75,7 @@ const handleTimeLineChange = (e) => {
         }
     } = e;
     video.currentTime = Math.floor(value);
-}
+};
 
 const handleFullScreen = () => {
     const fullScreen = document.fullscreenElement;
@@ -89,7 +87,7 @@ const handleFullScreen = () => {
         fullScreenIcon.classList = "fas fa-compress";
     }
 
-}
+};
 
 const hideControls = () => {
     videoControls.classList.remove("showing");
@@ -110,15 +108,24 @@ const handleMouseMove = () => {
 
 const handleMouseLeave = () => {
     controlsTimeout = setTimeout(hideControls, 3000);
-}
+};
+
+const handleKeyDown = (e) => {
+    const keyCode = e.keyCode;
+    if (keyCode === 32) {
+        handleVideoPlay();
+    }
+};
 
 
-playBtn.addEventListener("click", handlePlayClick);
+playBtn.addEventListener("click", handleVideoPlay);
 muteBtn.addEventListener("click", handleMute);
 timeLine.addEventListener("input", handleTimeLineChange);
 volumeRange.addEventListener("input", handleVolume);
 video.addEventListener("loadeddata", handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
+video.addEventListener("click", handleVideoPlay);
 fullScreenBtn.addEventListener("click", handleFullScreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
+window.addEventListener("keydown", handleKeyDown);
