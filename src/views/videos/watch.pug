@@ -3,32 +3,23 @@ include ../mixins/video
 
 block content
     div#videoContainer
-        video(src=`/${video.fileUrl}`, controls, style="width: 960px; height: 540px;")
-        div#videoControls
-            button#play Play
-            button#mute Mute
-            input(type="range",step="0.1", value = 0.5, min="0", max="1")#volume
+        video(src=`/${video.fileUrl}`)
+        div#videoControls.videoControls
+            div.videoControls__play
+                span#play.videoControls__playBtn
+                    i.fas.fa-play
+                div.videoControls__time
+                    span#currentTime 00:00
+                    span  / 
+                    span#totalTime 00:00
+            input(type="range",step="1", value = 0, min="0")#timeline.videoControls__timeline
+            div.videoControls__volume
+                span#mute
+                    i.fas.fa-volume-up
+                input(type="range",step="0.1", value = 0.5, min="0", max="1")#volume
             div 
-                span#currentTime 00:00:00
-                span  / 
-                span#totalTime 00:00:00
-            div 
-                input(type="range",step="1", value = 0, min="0")#timeline
-            div 
-                button#fullscreenBtn Enter Full Screen
-    //-
-        small Uploaded by 
-            a(href=`/users/${video.owner._id}`) #{video.owner.name}
-        div
-            p=video.description
-            ul
-                each hashtag in video.hashtags
-                    li=hashtag
-            small=video.createdAt
-        if String(loggedInUser._id) === String(video.owner._id)
-            a(href=`${video.id}/edit`) Edit video 👉
-            br
-            a(href=`${video.id}/delete`) Delete Video 👉
+                span#fullScreenBtn
+                    i.fas.fa-expand
 
 block scripts
     script(src="/assets/js/videoPlayer.js")
