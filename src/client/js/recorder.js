@@ -2,12 +2,18 @@ const startBtn = document.getElementById("startBtn");
 const preview = document.getElementById("preview");
 
 let stream = null;
+let recorder = null;
 
+const handleDownload = () => {
+
+};
 
 const handleStop = () => {
-    startBtn.innerText = "Start Recording";
+    startBtn.innerText = "Download Recording";
     startBtn.removeEventListener("click", handleStop);
-    startBtn.addEventListener("click", handleStart);
+    startBtn.addEventListener("click", handleDownload);
+
+    recorder.stop();
 };
 
 const handleStart = () => {
@@ -15,16 +21,19 @@ const handleStart = () => {
     startBtn.removeEventListener("click", handleStart);
     startBtn.addEventListener("click", handleStop);
 
-    const recorder = new MediaRecorder(stream);
+    recorder = new MediaRecorder(stream);
     recorder.ondataavailable = (e) => {
-        console.log(e);
+        //console.log(e.data); //e.data는 파일
+        const videoFile = URL.createObjectURL(e.data); //브라우저의 메모리상의 위치를 가르키는 url
+        preview.srcObject = null;
+        preview.src = videoFile;
+        preview.loop = true;
+        preview.play();
+
     };
     console.log(recorder);
     recorder.start();
     console.log(recorder);
-    setTimeout(() => {
-        recorder.stop();
-    }, 10000);
 };
 
 const init = async () => {
