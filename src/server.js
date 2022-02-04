@@ -16,6 +16,13 @@ const logger = morgan("dev");
 app.set("views", process.cwd() + "/src/views")
 app.set("view engine", "pug");
 
+//ffmpeg 최신버전 보안상 이유로 corp 처리
+app.use((req, res, next) => {
+    res.header("Cross-Origin-Embedder-Policy", "require-corp");
+    res.header("Cross-Origin-Opener-Policy", "same-origin");
+    next();
+});
+
 app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 
@@ -29,7 +36,7 @@ app.use(session({
 app.use(localsMiddleware); //꼭 session middleware 이후에 와야 함.
 //express에게 해당 path의 입력이 static이라고, 즉 유저에게 공개해달라고 알려줌.
 app.use("/uploads", express.static("uploads"));
-app.use("/assets", express.static("assets"));
+app.use("/assets", express.static("assets"), express.static("node_modules/@ffmpeg/core/dist"));
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);

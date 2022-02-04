@@ -23,4 +23,5 @@ header
                       if loggedInUser.avatarUrl===""
                         span 😋
                       else
-                        img(src=`${loggedInUser.avatarUrl}`).header__avatar
+                        img(src=loggedInUser.avatarUrl, crossorigin).header__avatar
+                        //- ffmpeg의 보안상 이유로 corp 처리를 server.js에서 해 줌. 이 때 github 로그인 후 아바타 변경을 따로 하지 않았으면 처리 해준 crop가 외부 링크를 차단하기 때문에 이미지를 불러올 수 없음. 따라서 crossorigin을 옵션으로 입력해 줄 필요가 있다.
