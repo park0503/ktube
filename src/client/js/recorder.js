@@ -23,29 +23,37 @@ const handleDownload = async () => {
 
     const mp4File = ffmpeg.FS("readFile", "output.mp4");
     const thumbFile = ffmpeg.FS("readFile", "thumbnail.jpg");
-
+    //readfile의 output type은 unit8array
     //console.log(mp4File);//raw data를 unit8array자료구조 형태로 나타냄
     //console.log(mp4File.buffer); //raw binary data를 사용하려면 .buffer가 필수
 
+
     const mp4Blob = new Blob([mp4File.buffer], { type: "video/mp4" });
-    //console.log(mp4Blob); //raw binary data를 js에서의 blob file로 변환
     const thumbBlob = new Blob([thumbFile.buffer], { type: "image/jpg" });
+    //console.log(mp4Blob); //raw binary data를 js에서의 blob으로 변환
 
     const mp4Url = URL.createObjectURL(mp4Blob);
-    //console.log(mp4Url); //변환시킨 blob file을 a tag에 삽입을 위해 url로 변환
     const thumbUrl = URL.createObjectURL(thumbBlob);
+    //console.log(mp4Url); //변환시킨 blob을 a tag에 삽입을 위해 url로 변환
 
     const a = document.createElement("a");
     a.href = mp4Url;
     a.download = "K-Tube_Recording.mp4";
-    //document.body.appendChild(a); //이렇게 실제 html 문서 상 추가를 하지 않고 다운로드를 하는 것은 브라우저 차원에서 금지함. 보안상 이유인듯. 없어도 되는데?
+    //document.body.appendChild(a); //이렇게 실제 html 문서 상 추가를 하지 않고 다운로드를 하는 것은 브라우저 차원에서 금지함. 보안상 이유인듯. ==>> 없어도 되더라. 주석처리
     a.click();
 
     const thumbA = document.createElement("a");
     thumbA.href = thumbUrl;
     thumbA.download = "K-Tube_Thumbnail.jpg";
-    //document.body.appendChild(thumbA); //이렇게 실제 html 문서 상 추가를 하지 않고 다운로드를 하는 것은 브라우저 차원에서 금지함. 보안상 이유인듯. 없어도 되는데?
     thumbA.click();
+
+    ffmpeg.FS("unlink", "recording.webm");
+    ffmpeg.FS("unlink", "output.mp4");
+    ffmpeg.FS("unlink", "thumbnail.jpg");
+
+    URL.revokeObjectURL(thumbUrl);
+    URL.revokeObjectURL(mp4Url);
+    URL.revokeObjectURL(videoFile);
 };
 
 const handleStop = () => {
