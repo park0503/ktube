@@ -7,6 +7,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middleware";
 import apiRouter from "./routers/apiRouter";
+import flash from "express-flash";
 
 
 
@@ -33,6 +34,8 @@ app.use(session({
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
 }));
 
+
+app.use(flash());
 app.use(localsMiddleware); //꼭 session middleware 이후에 와야 함.
 //express에게 해당 path의 입력이 static이라고, 즉 유저에게 공개해달라고 알려줌.
 app.use("/uploads", express.static("uploads"));
