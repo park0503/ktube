@@ -34,10 +34,13 @@ block content
             a(href=`${video.id}/edit`) Edit video 👉
             br
             a(href=`${video.id}/delete`) Delete Video 👉
-    div.video__comments
-        form.video__comment-form#commentForm
-            textarea(cols="30", rows="10", placeholder="Write a nice comment")
+    if loggedIn
+        div.video__comments
+            form.video__comment-form#commentForm
+                textarea(cols="30", rows="10", placeholder="Write a nice comment")
+                button Add Comment
 
 block scripts
     script(src="/assets/js/videoPlayer.js")
-    script(src="/assets/js/commentSection.js")
+    if loggedIn
+        script(src="/assets/js/commentSection.js")
