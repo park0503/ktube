@@ -20,6 +20,10 @@ const addComment = (text, id) => {
     videoComments.prepend(newComment);
 };
 
+const removeComment = async (e) => {
+
+};
+
 const handleSubmit = async (e) => {
     e.preventDefault();
     const textarea = form.querySelector("textarea");
@@ -37,9 +41,9 @@ const handleSubmit = async (e) => {
             text
         })
     });
-    textarea.value = "";
     //window.location.reload();
     if (response.status === 201) {
+        textarea.value = "";
         const { newCommentId } = await response.json();
         addComment(text, newCommentId);
     }
