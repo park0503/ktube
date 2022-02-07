@@ -2,7 +2,7 @@ const video = document.querySelector("video");
 const form = document.getElementById("commentForm");
 
 
-const handleSubmit = async (e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
     const textarea = form.querySelector("textarea");
     const text = textarea.value;
@@ -19,9 +19,7 @@ const handleSubmit = async (e) => {
             text
         })
     });
-    console.log(JSON.stringify({
-        text
-    }));
+    textarea.value = "";
 };
 
 if (form) {
