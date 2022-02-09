@@ -52,7 +52,6 @@ export const postEdit = async (req, res) => {
         file,
     } = req;
     const {
-        avatarUrl,
         name,
         email,
         username,
