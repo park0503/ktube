@@ -4,8 +4,10 @@
     "description": "",
     "scripts": {
         "dev:server": "nodemon",
-        "dev:assets": "webpack",
+        "dev:assets": "webpack --mode=development --watch",
+        "build": "npm run build:server && npm run build:assets",
         "build:server": "babel src -d build",
+        "build:assets": "webpack --mode=production",
         "start": "node build/init.js"
     },
     "repository": {
@@ -49,5 +51,9 @@
         "style-loader": "^3.2.1",
         "webpack": "^5.51.1",
         "webpack-cli": "^4.8.0"
+    },
+    "engines": {
+        "node": "16.x",
+        "npm": "8.x"
     }
 }

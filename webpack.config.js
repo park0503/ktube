@@ -13,8 +13,6 @@ module.exports = {
         recorder: BASE_JS + "recorder.js",
         commentSection: BASE_JS + "commentSection.js"
     },
-    mode: 'development',
-    watch: true,
     output: {
         filename: "js/[name].js",
         //path는 무조건 절대경로
