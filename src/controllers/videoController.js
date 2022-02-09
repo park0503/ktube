@@ -163,6 +163,16 @@ export const createComment = async (req, res, next) => {
     return res.status(201).json({ newCommentId: comment._id });
 };
 
-export const deleteComment = async () => {
-
+export const deleteComment = async (req, res, next) => {
+    const {
+        session: { user },
+        params: { id }
+    } = req;
+    const comment = await Comment.findById(id);
+    if (comment && comment.owner.toString() === user._id) {
+        await Comment.deleteOne({ _id: id });
+        return res.sendStatus(200);
+    } else {
+        return res.sendStatus(403);
+    }
 };
