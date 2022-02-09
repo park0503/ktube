@@ -170,9 +170,15 @@ export const deleteComment = async (req, res, next) => {
     } = req;
     const comment = await Comment.findById(id);
     if (comment && comment.owner.toString() === user._id) {
+        const video = await Video.findById(comment.video);
+        if (!video) {
+            return res.sendStatus(404);
+        }
         await Comment.deleteOne({ _id: id });
+        video.comments.pop(id);
+        video.save()
         return res.sendStatus(200);
     } else {
-        return res.sendStatus(403);
+        return res.sendStatus(404);
     }
 };
