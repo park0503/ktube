@@ -70,7 +70,10 @@ const handleDownload = async () => {
     actionBtn.addEventListener("click", handleStart);
 };
 
-const handleStart = () => {
+const handleStart = async () => {
+    if (recorder) {
+        await init();
+    }
     actionBtn.innerText = "Recording...";
     actionBtn.disabled = true;
     actionBtn.removeEventListener("click", handleStart);
@@ -103,8 +106,10 @@ const init = async () => {
     });
     preview.srcObject = stream; // stream은 Object기에 src가 아닌 srcObject 속성에 넣어줘야 함
     preview.play();
+    actionBtn.innerText = "Start Recording";
+    actionBtn.disabled = false;
+    actionBtn.addEventListener("click", handleStart);
 };
 
 init();
 
-actionBtn.addEventListener("click", handleStart);
