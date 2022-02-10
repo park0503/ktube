@@ -1,6 +1,7 @@
 import User from "../models/User";
 import bcrypt from "bcrypt"
 import fetch from "node-fetch";
+import { isHeroku } from "../middleware";
 
 export const getJoin = (req, res) => {
     return res.render("join", {
@@ -74,7 +75,7 @@ export const postEdit = async (req, res) => {
             });
         }
     }
-    const updatedUser = await User.findByIdAndUpdate(_id, { avatarUrl: file ? file.location : sessionAvatarUrl, name, email, username, location }, { new: true }); //findByIdAndUpdate의 3번째 인자는 option이다.
+    const updatedUser = await User.findByIdAndUpdate(_id, { avatarUrl: file ? (isHeroku ? file.location : `/${file.path}`) : sessionAvatarUrl, name, email, username, location }, { new: true }); //findByIdAndUpdate의 3번째 인자는 option이다.
     //req.session.user = {
     //    ...req.session.user,
     //    name,
