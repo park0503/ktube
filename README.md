@@ -1,16 +1,13 @@
 # K-Tube
 
 ## 2021 노마드 코더 유투부 클론코딩
----
 2020년도 webpack에서 중단했던 클론코딩,
 2021 리뉴얼 기념 끝까지 달립니다.
 
 2022.02.11 강의 100% 정주행 완료
 
 ## 사용 Stack
----
-<img src="https://img.shields.io/badge/HTML5-E34F26?style={스타일}&logo=HTML5&logoColor=ffffff"/>
-<img src="https://img.shields.io/badge/Scss-CC6699?style={스타일}&logo=Sass&logoColor=ffffff"/>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style={스타일}&logo=HTML5&logoColor=ffffff"/> <img src="https://img.shields.io/badge/Scss-CC6699?style={스타일}&logo=Sass&logoColor=ffffff"/>
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style={스타일}&logo=JavaScript&logoColor=000000"/>
 <img src="https://img.shields.io/badge/Node.js-339933?style={스타일}&logo=Node.js&logoColor=ffffff"/>
 <img src="https://img.shields.io/badge/MongoDB-47A248?style={스타일}&logo=MongoDB&logoColor=ffffff"/>
@@ -24,7 +21,6 @@
 
 
 ## 2021 리뉴얼 버전 목차
----
 1. INTRODUCTION
 2. SET UP
 3. INTRODUCTION TO EXPRESS
@@ -44,7 +40,6 @@
 17. DEPLOYMENT
 
 ## 추가 기능 개발 LIST
----
 - [ ] Video 수정 및 삭제기능
 - [ ] 회원 탈퇴 기능
 - [x] video 재녹화 기능 안정화
@@ -54,7 +49,6 @@
 - [ ] 디자인 개선
  
 ## 제작기간
----
 * 강의 내용
 
     2021.08.14 ~ 2021.09.05, 2022.01.03 ~ 2022.02.11
